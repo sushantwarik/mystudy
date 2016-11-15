@@ -1,0 +1,191 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "LDAP User API",
+    "description" : "REST service to update LDAP entries",
+    "version" : "1.0.0"
+  },
+  "host" : "webservices.rms.nsw.gov.au",
+  "schemes" : [ "https", "http" ],
+  "basePath" : "/v1/account",
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/user/{userId}" : {
+      "get" : {
+        "summary" : "User account details",
+        "operationId" : "getUserDetailById",
+        "description" : "User account details are retrieved",
+        "produces" : "application/json",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "user id whose details are to be retrieved",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "tags" : [ "User" ],
+        "responses" : {
+          "200" : {
+            "description" : "user account details",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "404" : {
+            "description" : "user account does not exist"
+          },
+          "500" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Update user details",
+        "operationId" : "updateUser",
+        "description" : "updates user information",
+        "produces" : "application/json",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "user id whose details are to be updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "UserDetails",
+          "in" : "body",
+          "description" : "user details to be updated",
+          "required" : true,
+          "type" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "user account details has been updated",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "404" : {
+            "description" : "user account does not exist"
+          },
+          "500" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "creates a user account",
+        "operationId" : "createUser",
+        "description" : "creates user account",
+        "produces" : "application/json",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "user id whose details are to be updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "UserDetails",
+          "in" : "body",
+          "description" : "user details to be updated",
+          "required" : true,
+          "type" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "user account has been created",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "404" : {
+            "description" : "user account does not exist"
+          },
+          "500" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a user entry",
+        "operationId" : "deleteUser",
+        "description" : "deletes user information",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "user id whose details are to be updated",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "user account has been deleted",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "404" : {
+            "description" : "user account does not exist"
+          },
+          "500" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "NameType" : {
+      "type" : "object",
+      "properties" : {
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "User" : {
+      "type" : "object",
+      "properties" : {
+        "userId" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "$ref" : "#/definitions/NameType"
+        }
+      }
+    },
+    "Error" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "fields" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
