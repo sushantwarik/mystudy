@@ -1,0 +1,14 @@
+DECLARE count SHARED INTEGER 1;
+
+CREATE FILTER MODULE FlowCommitTest_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF MOD(count,2) =0 THEN
+			SET count = count + 1;
+			RETURN FALSE;
+		END IF;
+		SET count = count + 1;
+		RETURN TRUE;
+	END;
+
+END MODULE;
