@@ -1,0 +1,31 @@
+BROKER SCHEMA au.gov.nsw.rms.intg.erp.rec_rep.test
+
+
+CREATE COMPUTE MODULE TestSubjectFlow_CreateResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE returnValue BOOLEAN SLEEP(10000);
+		DECLARE inRef REFERENCE TO InputRoot.XMLNSC.Class;
+		DECLARE numRows INT 0;
+		FOR student AS inRef.Students.Student[] DO
+			PASSTHRU('INSERT INTO CLASS_STUDENTS VALUES(?,?,?,?,?)',inRef.ClassId,student.(XMLNSC.Attribute)RollNo,student.FirstName,student.LastName,student.Marks);
+			SET numRows = numRows + 1;
+		END FOR;
+		SET OutputRoot.XMLNSC.Result.Message = 'No. of Records inserted ' || CAST(numRows AS CHAR);
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

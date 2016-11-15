@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:foundation_RMSLogger.msgnode="foundation/RMSLogger.msgnode" xmlns:mbmonitor="http://www.ibm.com/wbi/2008/eflow_mbmonitor"
+    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="au/gov/nsw/rms/intg/erp/rec_rep/test/TestSubjectFlow.msgflow" nsPrefix="au_gov_nsw_rms_intg_erp_rec_rep_test_TestSubjectFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="TestSubjectFlow" bundleName="au/gov/nsw/rms/intg/erp/rec_rep/test/TestSubjectFlow" pluginId="RecordReplayTestApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/RecordReplayTestApp/icons/full/obj16/TestSubjectFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/RecordReplayTestApp/icons/full/obj30/TestSubjectFlow.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="177,131" URLSpecifier="/record_replay" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="HTTP Input"/>
+        <nsMappingTable nsPrefix="tns" namespace="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+        <monitorEvents eventSourceDescription="Catch terminal" eventSourceName="HTTP Input.terminal.catch" eventIdentity="DB Transaction Failed">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent" eventUOW="independent">
+            <applicationData dataLocation="$Root/XMLNSC/tns:BusinessAreaNotification" isXPath="true" complexData="true">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </applicationData>
+            <globalTransactionCorrelator/>
+            <parentTransactionCorrelator dataLocation="$Root/XMLNSC/tns:BusinessAreaNotification/tns:ServiceHeader/ServiceOperation" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </parentTransactionCorrelator>
+            <localTransactionCorrelator dataLocation="$Root/XMLNSC/tns:BusinessAreaNotification/tns:ServiceHeader/TransactionId" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </localTransactionCorrelator>
+            <bitStreamData encoding="CDATA" bitstreamContent="body"/>
+            <eventName literal="DB Transaction Failed"/>
+            <eventFilter dataLocation="true()" isXPath="true">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </eventFilter>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="552,128">
+        <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="357,127" dataSource="SOADataSourceLocal" transaction="commit" computeExpression="esql://routine/au.gov.nsw.rms.intg.erp.rec_rep.test#TestSubjectFlow_CreateResponse.Main">
+        <translation xmi:type="utility:ConstantString" string="CreateResponse"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="180,216" queueName="ERP_EIP_REBNTF_BLNK_INQ" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="MQ Input"/>
+        <nsMappingTable nsPrefix="tns" namespace="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+        <monitorEvents eventSourceDescription="Catch terminal" eventSourceName="MQ Input.terminal.catch" eventIdentity="MQ Catch Failure">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent" eventUOW="independent">
+            <applicationData dataLocation="$Root/XMLNSC/tns:BusinessAreaNotification" isXPath="true" complexData="true">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </applicationData>
+            <globalTransactionCorrelator/>
+            <parentTransactionCorrelator dataLocation="$Root/XMLNSC/tns:BusinessAreaNotification/tns:ServiceHeader/ServiceOperation" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </parentTransactionCorrelator>
+            <localTransactionCorrelator dataLocation="$Root/XMLNSC/tns:BusinessAreaNotification/tns:ServiceHeader/TransactionId" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </localTransactionCorrelator>
+            <bitStreamData encoding="CDATA" bitstreamContent="body"/>
+            <eventName literal="MQ Catch Failure"/>
+            <eventFilter dataLocation="true()" isXPath="true">
+              <nsPrefixMap prefix="tns" nsURI="http://transport.nsw.gov.au/Schema/Finance/FinancialAccounting/BusinessArea/v1"/>
+            </eventFilter>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="foundation_RMSLogger.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="317,269" logLevel="AUDIT" printPayload="true">
+        <translation xmi:type="utility:ConstantString" string="RMS Logger"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in">
+        <bendPoints>186,103,-190,106</bendPoints>
+      </connections>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>
