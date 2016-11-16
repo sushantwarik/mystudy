@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:services xmlns:ns2="http://com.ibm.etools.mft.service">
+    <ns2:service name="MQService" wsdlFileName="MQService.wsdl" portType="MQService">
+        <ns2:operations>
+            <ns2:operation name="GetCustomerDetails"/>
+        </ns2:operations>
+        <ns2:policies>
+            <ns2:policy name="MQServiceConnectionPolicy" location=""/>
+        </ns2:policies>
+        <ns2:metadata>
+            <discovery>
+                <discoveryConnection>
+                    <mqConnectionDetails>
+                        <mqConnectionType>LOCAL</mqConnectionType>
+                        <queueManagerName>IIBQMGR</queueManagerName>
+                        <queueManagerHost>localhost</queueManagerHost>
+                        <listenerPort>1414</listenerPort>
+                        <channelName>SYSTEM.BKR.CONFIG</channelName>
+                    </mqConnectionDetails>
+                </discoveryConnection>
+                <runtimeConnection/>
+                <filterProperties>
+                    <messageFormatProperties>
+                        <includeSystemObjects>false</includeSystemObjects>
+                        <includeTempObjects>false</includeTempObjects>
+                    </messageFormatProperties>
+                </filterProperties>
+                <selectedObjects>
+                    <Queue>
+                        <id>DVS.IN</id>
+                        <nodeName>DVS.IN</nodeName>
+                        <input>true</input>
+                    </Queue>
+                    <Queue>
+                        <id>DVS.OUT</id>
+                        <nodeName>DVS.OUT</nodeName>
+                        <output>true</output>
+                    </Queue>
+                </selectedObjects>
+                <selection>
+                    <selectionProperties>
+                        <interfaceProperties>
+                            <portTypeName>MQService</portTypeName>
+                            <nsProperty>http://MQService</nsProperty>
+                            <defaultMessageConfig>type</defaultMessageConfig>
+                        </interfaceProperties>
+                        <serviceOperationProperties>
+                            <ServiceOperationName>GetCustomerDetails</ServiceOperationName>
+                        </serviceOperationProperties>
+                        <serviceOperationMessagesProperties>
+                            <RequestImportSchema>Customer.xsd</RequestImportSchema>
+                            <ResponseImportSchema>Customer.xsd</ResponseImportSchema>
+                        </serviceOperationMessagesProperties>
+                        <InputMessageProperties>
+                            <inputMessageName>CustomerType</inputMessageName>
+                            <inputMessageNamespace>http://www.rms.nsw.gov.au/customer/v1</inputMessageNamespace>
+                            <inputMessageType>type</inputMessageType>
+                        </InputMessageProperties>
+                        <OutputMessageProperties>
+                            <outputMessageName>CustomerType</outputMessageName>
+                            <outputMessageNamespace>http://www.rms.nsw.gov.au/customer/v1</outputMessageNamespace>
+                            <outputMessageType>type</outputMessageType>
+                        </OutputMessageProperties>
+                    </selectionProperties>
+                </selection>
+                <outputProperties/>
+            </discovery>
+        </ns2:metadata>
+        <ns2:connectors>
+            <ns2:connector binding="com/ibm/mft/connector/mq:MQConnector" version="1.0.0" location="MQService.wsdl"/>
+        </ns2:connectors>
+        <ns2:dataTypes>
+            <ns2:dataType name="" location="MQService_InlineSchema.xsd"/>
+        </ns2:dataTypes>
+    </ns2:service>
+</ns2:services>

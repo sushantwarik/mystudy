@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:services xmlns:ns2="http://com.ibm.etools.mft.service">
+    <ns2:service name="MQService_request_response" wsdlFileName="MQService_request_response.wsdl" portType="MQService_request_response">
+        <ns2:operations>
+            <ns2:operation name="getCustomerPO"/>
+        </ns2:operations>
+        <ns2:policies>
+            <ns2:policy name="MQService_request_responseConnectionPolicy" location=""/>
+        </ns2:policies>
+        <ns2:metadata>
+            <discovery>
+                <discoveryConnection>
+                    <mqConnectionDetails>
+                        <mqConnectionType>LOCAL</mqConnectionType>
+                        <queueManagerName>REMOTEQMGR</queueManagerName>
+                        <queueManagerHost>localhost</queueManagerHost>
+                        <listenerPort>1414</listenerPort>
+                        <channelName>SYSTEM.BKR.CONFIG</channelName>
+                    </mqConnectionDetails>
+                </discoveryConnection>
+                <runtimeConnection/>
+                <filterProperties>
+                    <messageFormatProperties>
+                        <includeSystemObjects>false</includeSystemObjects>
+                        <includeTempObjects>false</includeTempObjects>
+                    </messageFormatProperties>
+                </filterProperties>
+                <selectedObjects>
+                    <Queue>
+                        <id>ERP_EIP_REAL_ESTATE_BUILDING_INQ</id>
+                        <nodeName>ERP_EIP_REAL_ESTATE_BUILDING_INQ</nodeName>
+                        <input>true</input>
+                    </Queue>
+                    <Queue>
+                        <id>ERP_EIP_REAL_ESTATE_CONTRACT_INQ</id>
+                        <nodeName>ERP_EIP_REAL_ESTATE_CONTRACT_INQ</nodeName>
+                        <output>true</output>
+                    </Queue>
+                </selectedObjects>
+                <selection>
+                    <selectionProperties>
+                        <interfaceProperties>
+                            <portTypeName>MQService_request_response</portTypeName>
+                            <nsProperty>http://MQService_request_response</nsProperty>
+                            <defaultMessageConfig>type</defaultMessageConfig>
+                        </interfaceProperties>
+                        <serviceOperationProperties>
+                            <ServiceOperationName>getCustomerPO</ServiceOperationName>
+                        </serviceOperationProperties>
+                        <serviceOperationMessagesProperties>
+                            <RequestImportSchema>MySchema.xsd</RequestImportSchema>
+                            <ResponseImportSchema>MySchema.xsd</ResponseImportSchema>
+                        </serviceOperationMessagesProperties>
+                        <InputMessageProperties>
+                            <inputMessageName>CustomerAddress</inputMessageName>
+                            <inputMessageNamespace>http://www.testschema.com/mqservice</inputMessageNamespace>
+                            <inputMessageType>type</inputMessageType>
+                        </InputMessageProperties>
+                        <OutputMessageProperties>
+                            <outputMessageName>PurchaseOrder</outputMessageName>
+                            <outputMessageNamespace>http://www.testschema.com/mqservice</outputMessageNamespace>
+                            <outputMessageType>type</outputMessageType>
+                        </OutputMessageProperties>
+                    </selectionProperties>
+                </selection>
+                <outputProperties/>
+            </discovery>
+        </ns2:metadata>
+        <ns2:connectors>
+            <ns2:connector binding="com/ibm/mft/connector/mq:MQConnector" version="1.0.0" location="MQService_request_response.wsdl"/>
+        </ns2:connectors>
+        <ns2:dataTypes>
+            <ns2:dataType name="" location="MQService_request_response_InlineSchema.xsd"/>
+        </ns2:dataTypes>
+    </ns2:service>
+</ns2:services>

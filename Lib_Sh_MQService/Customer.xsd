@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.rms.nsw.gov.au/customer/v1" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.rms.nsw.gov.au/customer/v1">
+
+    <complexType name="CustomerType">
+    	<sequence>
+    		<element name="CustomerId" type="tns:CustomerIdType"></element>
+    		<element name="NameDetails" type="tns:PersonNameType"></element>
+    	</sequence>
+    </complexType>
+
+
+    <simpleType name="CustomerIdType">
+    	<restriction base="string">
+    		<length value="8"></length>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="PersonNameType">
+    	<sequence>
+    		<element name="FirstName" type="tns:NameType"></element>
+    		<element name="MiddleName" type="tns:NameType"></element>
+    		<element name="LastName" type="tns:NameType"></element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="NameType">
+    	<restriction base="string">
+    		<maxLength value="40"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <element name="Customer" type="tns:CustomerType"></element>
+</schema>

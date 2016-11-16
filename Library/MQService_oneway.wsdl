@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MQService_oneway" targetNamespace="http://MQService_oneway" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://MQService_oneway" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wmqservice="http://www.ibm.com/xmlns/prod/wmq/bindings/1.0" xmlns:importReqNs="http://www.testschema.com/mqservice">
+<wsdl:documentation><wsdl:appinfo source="WMQI_APPINFO"><MRWSDLAppInfo imported="true"><generatedXSD location="MQService_oneway_InlineSchema.xsd"/><binding hasEncoding="false" imported="true" name="MQService_oneway_Wmq_Binding" originalBindingStyle="document"/></MRWSDLAppInfo></wsdl:appinfo></wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://MQService_oneway">
+      <xsd:import namespace="http://www.testschema.com/mqservice" schemaLocation="MySchema.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="updateCustomer_Input">
+    <wsdl:part name="updateCustomer_Input_Part" element="importReqNs:Address">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MQService_oneway">
+    <wsdl:operation name="updateCustomer">
+      <wsdl:input message="tns:updateCustomer_Input">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MQService_oneway_Wmq_Binding" type="tns:MQService_oneway">
+    <wmqservice:binding/>
+    <wsdl:operation name="updateCustomer">
+      <wsdl:input>
+        <wmqservice:body/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MQService_oneway">
+    <wsdl:port name="MQService_oneway_Wmq_Port" binding="tns:MQService_oneway_Wmq_Binding">
+      <wmqservice:address location="wmq:/msg/queue/Queue1"/>
+      <wmqservice:connectQueueManager>QM1</wmqservice:connectQueueManager>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

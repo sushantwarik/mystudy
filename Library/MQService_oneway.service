@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:services xmlns:ns2="http://com.ibm.etools.mft.service">
+    <ns2:service name="MQService_oneway" wsdlFileName="MQService_oneway.wsdl" portType="MQService_oneway">
+        <ns2:operations>
+            <ns2:operation name="updateCustomer"/>
+        </ns2:operations>
+        <ns2:metadata>
+            <discovery>
+                <discoveryConnection>
+                    <mqConnectionDetails>
+                        <mqConnectionType>LOCAL</mqConnectionType>
+                        <queueManagerName>QM1</queueManagerName>
+                        <queueManagerHost>localhost</queueManagerHost>
+                        <listenerPort>1414</listenerPort>
+                        <channelName>SYSTEM.BKR.CONFIG</channelName>
+                    </mqConnectionDetails>
+                </discoveryConnection>
+                <runtimeConnection>
+                    <InputMessageHeaderProperties/>
+                </runtimeConnection>
+                <filterProperties>
+                    <messageFormatProperties>
+                        <messageExchangePattern>One-Way</messageExchangePattern>
+                    </messageFormatProperties>
+                </filterProperties>
+                <selectedObjects>
+                    <Queue>
+                        <id>Queue1</id>
+                        <nodeName>Queue1</nodeName>
+                        <input>true</input>
+                    </Queue>
+                </selectedObjects>
+                <selection>
+                    <selectionProperties>
+                        <interfaceProperties>
+                            <portTypeName>MQService_oneway</portTypeName>
+                            <nsProperty>http://MQService_oneway</nsProperty>
+                            <defaultMessageConfig>element</defaultMessageConfig>
+                        </interfaceProperties>
+                        <serviceOperationProperties>
+                            <ServiceOperationName>updateCustomer</ServiceOperationName>
+                        </serviceOperationProperties>
+                        <serviceOperationMessagesProperties>
+                            <RequestImportSchema>MySchema.xsd</RequestImportSchema>
+                        </serviceOperationMessagesProperties>
+                        <InputMessageProperties>
+                            <inputMessageName>Address</inputMessageName>
+                            <inputMessageNamespace>http://www.testschema.com/mqservice</inputMessageNamespace>
+                            <inputMessageType>element</inputMessageType>
+                        </InputMessageProperties>
+                    </selectionProperties>
+                </selection>
+                <outputProperties/>
+            </discovery>
+        </ns2:metadata>
+        <ns2:connectors>
+            <ns2:connector binding="com/ibm/mft/connector/mq:MQConnector" version="1.0.0" location="MQService_oneway.wsdl"/>
+        </ns2:connectors>
+        <ns2:dataTypes/>
+    </ns2:service>
+</ns2:services>

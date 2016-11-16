@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MQService_request_response" targetNamespace="http://MQService_request_response" xmlns:wmqservice="http://www.ibm.com/xmlns/prod/wmq/bindings/1.0" xmlns:tns="http://MQService_request_response" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:documentation><wsdl:appinfo source="WMQI_APPINFO"><MRWSDLAppInfo imported="true"><generatedXSD location="MQService_request_response_InlineSchema.xsd"/><binding hasEncoding="false" imported="true" name="MQService_request_response_Wmq_Binding" originalBindingStyle="document"/></MRWSDLAppInfo></wsdl:appinfo></wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://MQService_request_response">
+      <xsd:include schemaLocation="MQService_request_response_InlineSchema.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getCustomerPO_Output">
+    <wsdl:part name="getCustomerPO_Output_Part" element="tns:getCustomerPO_Response">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomerPO_Input">
+    <wsdl:part name="getCustomerPO_Input_Part" element="tns:getCustomerPO">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MQService_request_response">
+    <wsdl:operation name="getCustomerPO">
+      <wsdl:input message="tns:getCustomerPO_Input">
+    </wsdl:input>
+      <wsdl:output message="tns:getCustomerPO_Output">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MQService_request_response_Wmq_Binding" type="tns:MQService_request_response">
+    <wmqservice:binding/>
+    <wsdl:operation name="getCustomerPO">
+      <wsdl:input>
+        <wmqservice:body/>
+      </wsdl:input>
+      <wsdl:output>
+        <wmqservice:body/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MQService_request_response">
+    <wsdl:port name="MQService_request_response_Wmq_Port" binding="tns:MQService_request_response_Wmq_Binding">
+      <wmqservice:address location="wmq:/msg/queue/QIN"/>
+      <wmqservice:replyTo>wmq:/msg/queue/QOUT</wmqservice:replyTo>
+      <wmqservice:connectQueueManager>REMOTEQMGR</wmqservice:connectQueueManager>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

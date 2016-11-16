@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MQService" targetNamespace="http://MQService" xmlns:wmqservice="http://www.ibm.com/xmlns/prod/wmq/bindings/1.0" xmlns:tns="http://MQService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:documentation><wsdl:appinfo source="WMQI_APPINFO"><MRWSDLAppInfo imported="true"><generatedXSD location="MQService_InlineSchema.xsd"/><binding hasEncoding="false" imported="true" name="MQService_Wmq_Binding" originalBindingStyle="document"/></MRWSDLAppInfo></wsdl:appinfo></wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://MQService">
+      <xsd:include schemaLocation="MQService_InlineSchema.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCustomerDetails_Input">
+    <wsdl:part name="GetCustomerDetails_Input_Part" element="tns:GetCustomerDetails">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerDetails_Output">
+    <wsdl:part name="GetCustomerDetails_Output_Part" element="tns:GetCustomerDetails_Response">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MQService">
+    <wsdl:operation name="GetCustomerDetails">
+      <wsdl:input message="tns:GetCustomerDetails_Input">
+    </wsdl:input>
+      <wsdl:output message="tns:GetCustomerDetails_Output">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MQService_Wmq_Binding" type="tns:MQService">
+    <wmqservice:binding/>
+    <wsdl:operation name="GetCustomerDetails">
+      <wsdl:input>
+        <wmqservice:body/>
+      </wsdl:input>
+      <wsdl:output>
+        <wmqservice:body/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MQService">
+    <wsdl:port name="MQService_Wmq_Port" binding="tns:MQService_Wmq_Binding">
+      <wmqservice:address location="wmq:/msg/queue/DVS.IN"/>
+      <wmqservice:replyTo>wmq:/msg/queue/DVS.OUT</wmqservice:replyTo>
+      <wmqservice:connectQueueManager>IIBQMGR</wmqservice:connectQueueManager>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

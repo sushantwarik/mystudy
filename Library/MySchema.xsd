@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.testschema.com/mqservice" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.testschema.com/mqservice">
+
+    <element name="Address" type="tns:CustomerAddress"></element>
+
+    <complexType name="CustomerAddress">
+    	<sequence>
+    		<element name="street" type="string"></element>
+    		<element name="town" type="string"></element>
+    		<element name="zipcode" type="string"></element>
+    		<element name="phone" type="string"></element>
+    		<element name="email" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PurchaseOrder"></complexType>
+
+    <element name="Order" type="tns:PurchaseOrder"></element>
+</schema>
